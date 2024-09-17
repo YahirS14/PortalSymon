@@ -4,11 +4,13 @@ import com.symon.portal.Utils.response.ApiResponse;
 import com.symon.portal.application.dto.UserDto;
 import com.symon.portal.application.services.UserService;
 import com.symon.portal.infrastructure.entity.UserEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "User", description = "Operations related to users")
 @RestController
 public class UserController {
     private final UserService userService;

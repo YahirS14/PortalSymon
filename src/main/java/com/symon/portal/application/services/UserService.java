@@ -2,7 +2,6 @@ package com.symon.portal.application.services;
 
 import com.symon.portal.application.dto.UserDto;
 import com.symon.portal.application.mapper.UserMapper;
-import com.symon.portal.domain.model.User;
 import com.symon.portal.infrastructure.entity.UserEntity;
 import com.symon.portal.infrastructure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,10 @@ public class UserService {
     }
 
     public UserEntity addUser(UserDto userDto) {
-        User user = UserMapper.toUser(userDto);
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new RuntimeException("User Already Exists");
         }
-        UserEntity entity = UserMapper.toUserEntity(user);
+        UserEntity entity = UserMapper.toUserEntity(UserMapper.toUser(userDto));
         userRepository.save(entity);
         return entity;
     }
